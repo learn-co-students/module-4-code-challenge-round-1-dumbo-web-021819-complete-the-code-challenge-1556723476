@@ -3,12 +3,19 @@ import Book from "../components/Book";
 import Form from "../components/Form";
 
 class BookList extends Component {
+
+  doNotDislike = (bookObj) => {
+    if (!bookObj.meLikey) {
+      this.props.handleClick(bookObj)
+    }
+  }
+
   render() {
     return (
       <div className="book-list">
         <h1>Book List</h1>
-        <Form />
-        <ul>{/*render list of books here*/}</ul>
+        <Form fuckItUpToTheTempo={this.props.lookinForSomeShitDownBelow}/>
+        <ul>{this.props.books.map(book => < Book book={book} key={book.id} handleClick={this.doNotDislike} /> )}</ul>
       </div>
     );
   }
