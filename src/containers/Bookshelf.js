@@ -2,10 +2,17 @@ import React from "react";
 import Book from "../components/Book";
 
 const Bookshelf = props => {
+
+  function generateShelvedBooks() {
+    return props.shelf.map(book => {
+      return <Book book={book}/>
+    })
+  }
+
   return (
-    <div>
+    <div onChange={props.removeFromShelf}>
       <h1>Book Shelf</h1>
-      <ul>{/*render list of books here*/}</ul>
+      <p>{generateShelvedBooks()}</p>
     </div>
   );
 };
