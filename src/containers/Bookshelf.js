@@ -3,9 +3,11 @@ import Book from "../components/Book";
 
 const Bookshelf = props => {
   return (
-    <div>
+    <div className="bookshelf">
       <h1>Book Shelf</h1>
-      <ul>{/*render list of books here*/}</ul>
+      <ul>{props.bookToGoOnShelf.map(book  => 
+        	<Book title={book.title} author={book.author} img={book.img} onClick={props.onBookClick}/>) }
+        	</ul>
     </div>
   );
 };
