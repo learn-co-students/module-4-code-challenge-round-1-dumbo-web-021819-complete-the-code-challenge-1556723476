@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import BookList from "./containers/BookList";
 import Bookshelf from "./containers/Bookshelf";
@@ -7,47 +7,40 @@ import Bookshelf from "./containers/Bookshelf";
 class App extends Component {
 
   state = {
-    bookList: [],
-    bookShelf: []
+    books: []
   }
 
   componentDidMount(){
     fetch('http://localhost:3005/books')
     .then(r => r.json())
-    .then(booksArray => this.setState({bookList: booksArray}))
+    .then(booksArray => this.setState({books: booksArray})
+    )
   }
 
-  clickInList = (bookObj) => {
-    if (!this.state.bookShelf.includes(bookObj)) {
-      const bookShelfCopy = [...this.state.bookShelf]
-      bookShelfCopy.push(bookObj)
-      this.setState({bookShelf: bookShelfCopy})
-    }
-  }
-
-  clickInShow = (bookObj) => {
-    if (this.state.bookShelf.includes(bookObj)) {
-      const bookShelfCopy = [...this.state.bookShelf]
-      const index = bookShelfCopy.indexOf(bookObj)
-      bookShelfCopy.splice(index, 1)
-      this.setState({bookShelf: bookShelfCopy})
-    }
+  handleClick = (bookObj) => {
+    const booksCopy = [...this.state.books]
+    const index = booksCopy.indexOf(bookObj)
+    bookObj.meLikey = !bookObj.meLikey
+    booksCopy.splice(index, 1, bookObj)
+    this.setState({books: booksCopy
+    })
   }
 
   yeahWeGonnaFuckThisAppUp = (yessir) => {
-    const bookListCopyWHY = this.state.bookList;
+    const booksCopyWHY = this.state.books;
     yessir.id = Date.now()
-    bookListCopyWHY.push(yessir)
-    this.setState({bookList: bookListCopyWHY})
+    booksCopyWHY.push(yessir)
+    this.setState({books: booksCopyWHY})
   }
 
   render() {
+    // console.log(this.state.books)
     return (
       <div className="book-container">
-        <BookList books={this.state.bookList} 
-        handleClick={this.clickInList}
+        <BookList books={this.state.books} 
+        handleClick={this.handleClick}
         lookinForSomeShitDownBelow={this.yeahWeGonnaFuckThisAppUp} />
-        <Bookshelf books={this.state.bookShelf} handleClick={this.clickInShow} />
+        <Bookshelf books={this.state.books.filter(book => book.meLikey)} handleClick={this.handleClick} />
       </div>
     );
   }

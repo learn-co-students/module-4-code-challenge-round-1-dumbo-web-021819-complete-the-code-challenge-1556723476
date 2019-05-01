@@ -9,7 +9,6 @@ class Form extends React.Component {
   handleChange = (e) => {
     const key = e.target.placeholder;
     const value = e.target.value;
-    const kerValur = {[key]: value}
     const kippityCopy = {...this.state.whyDoWePutThisShitInStateBeforeItIsSubmitted}
     kippityCopy[key] = value
     this.setState({whyDoWePutThisShitInStateBeforeItIsSubmitted: kippityCopy })
