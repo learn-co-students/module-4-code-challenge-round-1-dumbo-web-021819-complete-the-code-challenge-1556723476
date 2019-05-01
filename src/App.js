@@ -67,7 +67,6 @@ class App extends Component {
     event.preventDefault()
     console.log(event.target.author.value)
     let newBook = {
-      id: null,
       title: event.target.title.value,
       author: event.target.author.value,
       img: event.target.imageUrl.value
