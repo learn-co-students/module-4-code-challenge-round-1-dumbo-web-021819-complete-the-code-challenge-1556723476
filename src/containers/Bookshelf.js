@@ -3,9 +3,9 @@ import Book from "../components/Book";
 
 const Bookshelf = props => {
   return (
-    <div>
+    <div onClick={props.handleShelfClick}>
       <h1>Book Shelf</h1>
-      <ul>{/*render list of books here*/}</ul>
+      <ul>{<Book book={props.book}/>}</ul>
     </div>
   );
 };
